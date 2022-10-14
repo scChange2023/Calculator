@@ -19,10 +19,11 @@ body.style.minHeight = "100vh";
 body.style.display = "flex";
 body.style.justifyContent = "center";
 body.style.alignItems = "center";
+body.style.backgroundColor = "black";
 container.style.display = "flex";
 container.style.flexDirection = "column";
-container.style.height = "50vh";
-container.style.width = "40vh";
+container.style.height = "80vh";
+container.style.width = "64vh";
 resultBar.style.borderRadius = "10%";
 resultBar.style.height = "75%";
 
@@ -67,6 +68,7 @@ while (buttonIndex <= 18) {
   button.style.borderRadius = "10%";
   button.style.backgroundColor = "#505050";
   button.style.color = "white";
+  button.style.fontSize = "5vh";
   if (rowContainerIndex == 0) {
     button.style.backgroundColor = "#D4D4D2";
     button.style.color = "black";

@@ -22,10 +22,11 @@ body.style.alignItems = "center";
 body.style.backgroundColor = "black";
 container.style.display = "flex";
 container.style.flexDirection = "column";
-container.style.height = "80vh";
-container.style.width = "64vh";
-resultBar.style.borderRadius = "10%";
+container.style.height = "70vh";
+container.style.width = "56vh";
+resultBar.style.borderRadius = "0%";
 resultBar.style.height = "75%";
+resultBar.style.fontSize = "large";
 
 //Row array for creating container for buttons
 const rowArray = [
@@ -62,9 +63,9 @@ while (buttonIndex <= 18) {
   );
   //   console.log(currentContainer);
   currentContainer.appendChild(button);
-  button.style.width = "80%";
+  button.style.width = "70%";
   button.style.display = "block";
-  button.style.borderRadius = "10%";
+  button.style.borderRadius = "5%";
   button.style.backgroundColor = "#505050";
   button.style.color = "white";
   button.style.fontSize = "5vh";

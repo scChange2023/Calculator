@@ -122,7 +122,7 @@ for (let i = 0; i <= buttonTextContentArray.length - 1; i++) {
   //   console.log(currentButton);
 }
 
-///Spreading fifth row buttons
+///Assigning variables to buttons
 let buttons = document.querySelectorAll(".button");
 resultBar = document.querySelector(".resultBar");
 
@@ -147,12 +147,14 @@ let sevenButton = document.getElementById("4");
 let eightButton = document.getElementById("5");
 let nineButton = document.getElementById("6");
 
+//Styling last row
 resultBar.type = "text";
 resultBar.size = "13000000";
 zeroButton.style.flex = "2";
 decimalButton.style.flex = "1";
 equalButton.style.flex = "1";
 
+//Assigning Values to number buttons and decimal
 zeroButton.value = 0;
 oneButton.value = 1;
 twoButton.value = 2;
@@ -168,9 +170,11 @@ decimalButton.value = ".";
 // let input1 = "";
 // let input2 = "";
 
+//Objects for two inputs/ functions use inputs as paramters
 let input1 = { a: "" }; //a:''
 let input2 = {};
 
+//Decides which operator to use
 let operatorObj = {
   addition: false,
   subtraction: false,
@@ -178,95 +182,40 @@ let operatorObj = {
   division: false,
 };
 
+// const objArray = Object.entries(operatorObj);
+// const filtered = objArray.filter(([key, value]) => value == true);
+
+//Add number values to input and result bar//if handler for negative numbers
 buttons.forEach((button) =>
   button.addEventListener("click", () => {
-    resultBar.value = "";
-    input1.a += button.value;
-    resultBar.value = input1.a;
+    // resultBar.value = "";
+    if ((resultBar.value = "-")) {
+      input1.a += button.value;
+      resultBar.value = input1.a;
+      console.log(input1, input2);
+    } else {
+      resultBar.value = "";
+      input1.a += button.value;
+      resultBar.value = input1.a;
+      console.log(input1, input2);
+    }
   })
 );
 
+//Turns all operators off
 function operatorFalse() {
   Object.keys(operatorObj).forEach((key) => {
     operatorObj[key] = false;
   });
 }
 
+//deep copies input 1 to input 2
 function transferInput() {
   input2.a = JSON.parse(JSON.stringify(resultBar.value));
   input1.a = "";
 }
 
-additionButton.addEventListener("click", () => {
-  if (input2.a > 0) {
-    totalInputs();
-    transferInput();
-    operatorFalse();
-    operatorObj.addition = true;
-  } else {
-    transferInput();
-    operatorFalse();
-    operatorObj.addition = true;
-  }
-});
-
-subtractionButton.addEventListener("click", () => {
-  if (input2.a > 0) {
-    totalInputs();
-    transferInput();
-    operatorFalse();
-    operatorObj.subtraction = true;
-  } else {
-    transferInput();
-    operatorFalse();
-    operatorObj.subtraction = true;
-  }
-});
-
-multiplcationButton.addEventListener("click", () => {
-  if (input2.a > 0) {
-    totalInputs();
-    transferInput();
-    operatorFalse();
-    operatorObj.multiplcation = true;
-  } else {
-    transferInput();
-    operatorFalse();
-    operatorObj.multiplcation = true;
-  }
-});
-
-divisionButton.addEventListener("click", () => {
-  if (input2.a > 0) {
-    totalInputs();
-    transferInput();
-    operatorFalse();
-    operatorObj.division = true;
-  } else {
-    transferInput();
-    operatorFalse();
-    operatorObj.division = true;
-  }
-});
-
-percentageButton.addEventListener("click", () => {
-  resultBar.value = parseFloat(resultBar.value) * 0.1;
-  input1.a = resultBar.value;
-  input2.a = "";
-});
-
-deleteButton.addEventListener("click", () => {
-  resultBar.value = "";
-  input1.a = "";
-  input2.a = "";
-});
-
-plusMinusButton.addEventListener("click", () => {
-  resultBar.value = parseFloat(resultBar.value) * -1;
-  input1.a = resultBar.value;
-  input2.a = "";
-});
-
+///PErforms operator on the two inputs.  Converts inputs from string to number
 function totalInputs() {
   if (operatorObj.addition == true) {
     resultBar.value = parseFloat(input1.a) + parseFloat(input2.a);
@@ -284,7 +233,97 @@ function totalInputs() {
   input2.a = "";
 }
 
-equalButton.addEventListener("click", totalInputs);
+additionButton.addEventListener("click", () => {
+  //Adds when two inputs are available
+  if (input2.a) {
+    totalInputs();
+    transferInput();
+    operatorFalse();
+    operatorObj.addition = true;
+    //Transfers first input to second input and turn addiotn operator on
+  } else {
+    transferInput();
+    operatorFalse();
+    operatorObj.addition = true;
+  }
+});
 
-console.log(input1, input2);
-console.log(operatorObj);
+subtractionButton.addEventListener("click", () => {
+  ///Subtracts when two inputs are available
+  if (input2.a && input1.a) {
+    console.log(input1, input2);
+    totalInputs();
+    // transferInput();
+    operatorFalse();
+    operatorObj.subtraction = true;
+  }
+  //If handler to add negative number to second input  OR negative number to first input
+  if (input2.a || (!input2.a && !input1.a)) {
+    console.log(input1, input2);
+    resultBar.value += "-";
+    input1.a = resultBar.value;
+  } else {
+    //Normal subtraction equation
+    console.log(input1, input2);
+    transferInput();
+    operatorFalse();
+    operatorObj.subtraction = true;
+  }
+});
+
+multiplcationButton.addEventListener("click", () => {
+  ///Multiplies inputs when two are available
+  if (input2.a) {
+    totalInputs();
+    transferInput();
+    operatorFalse();
+    operatorObj.multiplcation = true;
+    console.log(input1, input2);
+  } else {
+    //Turns on multiplication operator and waits for second input
+    transferInput();
+    operatorFalse();
+    operatorObj.multiplcation = true;
+    console.log(input1, input2);
+  }
+});
+
+divisionButton.addEventListener("click", () => {
+  //Same as multiplication
+  if (input2.a) {
+    console.log(input1, input2);
+    totalInputs();
+    transferInput();
+    operatorFalse();
+    operatorObj.division = true;
+  } else {
+    //Same as multiplication
+    transferInput();
+    operatorFalse();
+    operatorObj.division = true;
+  }
+});
+
+///Turns current input to 1/10 of value
+percentageButton.addEventListener("click", () => {
+  resultBar.value = parseFloat(resultBar.value) * 0.1;
+  input1.a = resultBar.value;
+});
+
+//Clears all inputs
+deleteButton.addEventListener("click", () => {
+  resultBar.value = "";
+  input1.a = "";
+  input2.a = "";
+});
+
+///Turns postive number to negative (vice versa)
+plusMinusButton.addEventListener("click", () => {
+  resultBar.value = parseFloat(resultBar.value) * -1;
+  input1.a = resultBar.value;
+  input2.a = "";
+});
+
+//Equal button calls back to Total Inputs function
+//PErforms tturned on operator for the two inputs
+equalButton.addEventListener("click", totalInputs);

@@ -319,9 +319,22 @@ deleteButton.addEventListener("click", () => {
 
 ///Turns postive number to negative (vice versa)
 plusMinusButton.addEventListener("click", () => {
-  resultBar.value = parseFloat(resultBar.value) * -1;
-  input1.a = resultBar.value;
-  input2.a = "";
+  switch (input1.a) {
+    case (input1.a = ""):
+      console.log(input1, input2);
+      resultBar.value += "-";
+      input1.a = resultBar.value;
+      console.log(input1, input2);
+      break;
+
+    default:
+      console.log(input1, input2);
+      resultBar.value = parseFloat(resultBar.value) * -1;
+      input1.a = resultBar.value;
+      input2.a = "";
+      console.log(input1, input2);
+      break;
+  }
 });
 
 //Equal button calls back to Total Inputs function

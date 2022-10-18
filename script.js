@@ -306,7 +306,7 @@ divisionButton.addEventListener("click", () => {
 
 ///Turns current input to 1/10 of value
 percentageButton.addEventListener("click", () => {
-  resultBar.value = parseFloat(resultBar.value) * 0.1;
+  resultBar.value = parseFloat(resultBar.value) * 0.01;
   input1.a = resultBar.value;
 });
 
